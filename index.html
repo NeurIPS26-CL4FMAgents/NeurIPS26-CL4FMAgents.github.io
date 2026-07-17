@@ -100,7 +100,7 @@
             position: relative;
             z-index: 1;
             padding: 0 2rem;
-            margin-top: 28px;
+            margin-top: 60px;
         }
 
         .hero h1 {
@@ -130,7 +130,7 @@
 
         /* Main Content */
         .content {
-            max-width: 820px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 3rem 2rem;
         }
@@ -312,6 +312,18 @@
             line-height: 1.4;
         }
 
+        .people-grid-4col {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem 3rem;
+            margin: 2rem 0;
+        }
+
+        .people-grid-4col .person {
+            width: 180px;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid #eee;
@@ -379,7 +391,7 @@
 <!-- Navigation -->
 <nav>
     <div class="nav-inner">
-        <a href="#" class="nav-title">CL-FMEA @ NeurIPS 2026</a>
+        <a href="#" class="nav-title">CL4FMAgents @ NeurIPS 2026</a>
         <ul class="nav-links">
             <li><a href="#news">News</a></li>
             <li><a href="#about">About</a></li>
@@ -398,7 +410,7 @@
     <div class="hero-content">
         <h1>NeurIPS 2026 Workshop on<br>Continual Learning in the Era of<br>Foundation Models and Embodied Agents</h1>
         <p class="meta">December 2026 &middot; Sydney, Australia</p>
-        <p class="contact">Contact: <a href="mailto:jonghyunchoi@snu.ac.kr">jonghyunchoi@snu.ac.kr</a>, <a href="mailto:xiao-ming.wu@polyu.edu.hk">xiao-ming.wu@polyu.edu.hk</a></p>
+        <p class="contact">Contact: <a href="mailto:neurips26.cl4fmagents@gmail.com">neurips26.cl4fmagents@gmail.com</a></p>
     </div>
 </div>
 
@@ -431,16 +443,12 @@
 
         <p><strong>Topics of interest include but are not limited to:</strong></p>
         <ul>
-            <li>Continual learning and adaptation for large language models and vision-language models</li>
-            <li>Lifelong learning for embodied agents and robotic systems</li>
-            <li>Catastrophic forgetting mitigation in foundation model fine-tuning</li>
-            <li>Memory, replay, and knowledge consolidation mechanisms</li>
-            <li>Online and few-shot adaptation in non-stationary environments</li>
-            <li>Long-term skill acquisition and composition</li>
-            <li>Safety and reliability during continual model updates</li>
-            <li>Benchmarks and evaluation frameworks for continual learning</li>
-            <li>Brain-inspired and cognitively motivated continual learning</li>
-            <li>Continual reinforcement learning and curriculum design</li>
+            <li>Continual pre-training and post-training of foundation models</li>
+            <li>Continual learning and self-evolution of LLM agents</li>
+            <li>Continual learning for embodied agents and robots</li>
+            <li>Memory, knowledge consolidation, and retrieval</li>
+            <li>Online adaptation and forgetting mitigation</li>
+            <li>Safe model updates, benchmarks, and evaluation</li>
         </ul>
 
         <p>Each submission will receive at least three reviews. Submissions must not re-present finalized work previously published at ML venues.</p>
@@ -507,29 +515,29 @@
         <h2>Invited Speakers</h2>
         <div class="people-grid">
             <div class="person">
-                <div class="placeholder-avatar">IR</div>
-                <div class="name">Irina Rish</div>
+                <img src="Irina.jpeg" alt="Irina Rish">
+                <div class="name"><a href="https://sites.google.com/view/irinarish/" target="_blank">Irina Rish</a></div>
                 <div class="affiliation">Université de Montréal / Mila</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">HS</div>
-                <div class="name">Hao Su</div>
-                <div class="affiliation">Fudan University</div>
-            </div>
-            <div class="person">
-                <div class="placeholder-avatar">CF</div>
-                <div class="name">Chelsea Finn</div>
+                <img src="Chelsea.jpeg" alt="Chelsea Finn">
+                <div class="name"><a href="https://ai.stanford.edu/~cbfinn/" target="_blank">Chelsea Finn</a></div>
                 <div class="affiliation">Stanford University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">AG</div>
-                <div class="name">Abhishek Gupta</div>
+                <img src="Abhishek.jpeg" alt="Abhishek Gupta">
+                <div class="name"><a href="https://abhishekunique.github.io/" target="_blank">Abhishek Gupta</a></div>
                 <div class="affiliation">University of Washington</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">GV</div>
-                <div class="name">Gido M. van de Ven</div>
+                <img src="Gido.jpeg" alt="Gido M. van de Ven">
+                <div class="name"><a href="https://gmvandeven.github.io/" target="_blank">Gido M. van de Ven</a></div>
                 <div class="affiliation">University of Groningen</div>
+            </div>
+            <div class="person">
+                <img src="Jeff.jpeg" alt="Jeff Clune">
+                <div class="name"><a href="http://jeffclune.com/" target="_blank">Jeff Clune</a></div>
+                <div class="affiliation">University of British Columbia / Vector Institute</div>
             </div>
         </div>
     </section>
@@ -537,40 +545,40 @@
     <!-- Organizers -->
     <section id="organizers">
         <h2>Organizers</h2>
-        <div class="people-grid">
+        <div class="people-grid-4col">
             <div class="person">
-                <div class="placeholder-avatar">JC</div>
-                <div class="name">Jonghyun Choi</div>
+                <img src="Jonghyun.jpeg" alt="Jonghyun Choi">
+                <div class="name"><a href="https://ppolon.github.io/" target="_blank">Jonghyun Choi</a></div>
                 <div class="affiliation">Seoul National University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">XW</div>
-                <div class="name">Xiao-Ming Wu</div>
-                <div class="affiliation">Hong Kong Polytechnic University</div>
+                <img src="Xiaoming.jpeg" alt="Xiao-Ming Wu">
+                <div class="name"><a href="http://www4.comp.polyu.edu.hk/~csxmwu/" target="_blank">Xiao-Ming Wu</a></div>
+                <div class="affiliation">The Hong Kong Polytechnic University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">RA</div>
-                <div class="name">Rahaf Aljundi</div>
+                <img src="Rahaf.jpeg" alt="Rahaf Aljundi">
+                <div class="name"><a href="https://scholar.google.com/citations?user=YLh7yrwAAAAJ&hl=en" target="_blank">Rahaf Aljundi</a></div>
                 <div class="affiliation">Toyota Motor Europe</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">JM</div>
-                <div class="name">Jorge Mendez-Mendez</div>
+                <img src="Jorge.jpeg" alt="Jorge Mendez-Mendez">
+                <div class="name"><a href="https://jorge-a-mendez.github.io/" target="_blank">Jorge Mendez-Mendez</a></div>
                 <div class="affiliation">Stony Brook University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">LW</div>
-                <div class="name">Liyuan Wang</div>
+                <img src="Liyuan.jpeg" alt="Liyuan Wang">
+                <div class="name"><a href="https://lywang3081.github.io/" target="_blank">Liyuan Wang</a></div>
                 <div class="affiliation">Tsinghua University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">YF</div>
-                <div class="name">Yujie Feng</div>
-                <div class="affiliation">Hong Kong Polytechnic University</div>
+                <img src="Yujie.jpeg" alt="Yujie Feng">
+                <div class="name"><a href="https://woodscene.github.io" target="_blank">Yujie Feng</a></div>
+                <div class="affiliation">The Hong Kong Polytechnic University</div>
             </div>
             <div class="person">
-                <div class="placeholder-avatar">YL</div>
-                <div class="name">Yuankai Luo</div>
+                <img src="Yuankai.jpeg" alt="Yuankai Luo">
+                <div class="name"><a href="https://luoyk1999.github.io/" target="_blank">Yuankai Luo</a></div>
                 <div class="affiliation">Nanjing University</div>
             </div>
         </div>
@@ -580,7 +588,7 @@
 
 <!-- Footer -->
 <footer>
-    &copy; 2026 CL-FMEA Workshop @ NeurIPS 2026. All rights reserved.
+    &copy; 2026 CL4FMAgents Workshop @ NeurIPS 2026. All rights reserved.
 </footer>
 
 </body>
