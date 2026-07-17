@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continual Learning in the Era of Foundation Models and Embodied Agents — NeurIPS 2026 Workshop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #333;
+            line-height: 1.8;
+            background: #fff;
+        }
+
+        /* Fixed Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 56px;
+        }
+
+        nav .nav-title {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 1.75rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('sydney_banner.jpg') center center / cover no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 2rem;
+            margin-top: 28px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero .meta {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .contact {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .hero .contact a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content section {
+            margin-bottom: 3.5rem;
+        }
+
+        .content h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            font-size: 0.98rem;
+            color: #444;
+        }
+
+        .content ul {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        .content ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .content strong {
+            color: #222;
+        }
+
+        /* News / Announcements */
+        .news-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            font-size: 0.82rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* Important Dates */
+        .dates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .dates-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .dates-table td {
+            padding: 0.85rem 0;
+            font-size: 0.95rem;
+        }
+
+        .dates-table td:first-child {
+            font-weight: 600;
+            color: #222;
+            width: 200px;
+        }
+
+        .dates-table td:last-child {
+            color: #555;
+        }
+
+        /* Schedule Table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .schedule-table th {
+            text-align: left;
+            padding: 0.75rem 0;
+            font-size: 0.85rem;
+            color: #888;
+            border-bottom: 2px solid #eee;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .schedule-table td {
+            padding: 0.7rem 0;
+            font-size: 0.93rem;
+            border-bottom: 1px solid #f5f5f5;
+            vertical-align: top;
+        }
+
+        .schedule-table td:first-child {
+            width: 130px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .schedule-table .session-header {
+            background: #f9f9fb;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .schedule-table .session-header td {
+            padding: 0.85rem 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Speakers & Organizers Grid */
+        .people-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .person {
+            text-align: center;
+            width: 150px;
+        }
+
+        .person img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f0f0f0;
+            margin-bottom: 0.75rem;
+        }
+
+        .person .placeholder-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #5c6bc0;
+            border: 3px solid #f0f0f0;
+        }
+
+        .person .name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 0.2rem;
+        }
+
+        .person .name a {
+            color: #1565c0;
+            text-decoration: none;
+        }
+
+        .person .name a:hover {
+            text-decoration: underline;
+        }
+
+        .person .affiliation {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #eee;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            nav .nav-title {
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .content {
+                padding: 2rem 1.25rem;
+            }
+
+            .people-grid {
+                gap: 1.5rem;
+            }
+
+            .person {
+                width: 120px;
+            }
+
+            .person .placeholder-avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 1.4rem;
+            }
+
+            .dates-table td:first-child {
+                width: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-title">CL-FMEA @ NeurIPS 2026</a>
+        <ul class="nav-links">
+            <li><a href="#news">News</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#cfp">Call for Papers</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#speakers">Speakers</a></li>
+            <li><a href="#organizers">Organizers</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Banner -->
+<div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>NeurIPS 2026 Workshop on<br>Continual Learning in the Era of<br>Foundation Models and Embodied Agents</h1>
+        <p class="meta">December 2026 &middot; Sydney, Australia</p>
+        <p class="contact">Contact: <a href="mailto:jonghyunchoi@snu.ac.kr">jonghyunchoi@snu.ac.kr</a>, <a href="mailto:xiao-ming.wu@polyu.edu.hk">xiao-ming.wu@polyu.edu.hk</a></p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+
+    <!-- News -->
+    <section id="news">
+        <h2>News</h2>
+        <div class="news-item">
+            <span class="news-date">[2026/07]</span> Workshop website is live!
+        </div>
+        <div class="news-item">
+            <span class="news-date">[2026/07]</span> Our workshop proposal has been accepted at NeurIPS 2026. See you in Sydney!
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <h2>About</h2>
+        <p>This workshop focuses on <strong>continual learning</strong> as a shared challenge for foundation models and embodied agents in dynamic, open-ended, and interactive environments. We intentionally bring these two areas together because they are becoming increasingly intertwined in modern AI: foundation models are becoming key components of embodied systems, while embodied settings expose models to non-stationary conditions that require continual adaptation.</p>
+        <p>This intersection gives rise to common challenges, including catastrophic forgetting, memory and knowledge consolidation, online adaptation, long-term skill acquisition, and safety during updates. The workshop centers specifically on continual learning problems that arise within and across these domains.</p>
+        <p>The workshop will bring together researchers from continual learning, foundation model adaptation, embodied intelligence, and robot learning to address shared challenges and identify new opportunities for cross-pollination.</p>
+    </section>
+
+    <!-- Call for Papers -->
+    <section id="cfp">
+        <h2>Call for Papers</h2>
+        <p>We invite short papers (up to 4 pages excluding references), position papers, benchmarks, systems papers, negative results, and interdisciplinary perspectives on continual learning for foundation models and embodied agents. All submissions are <strong>non-archival</strong> and will be managed through OpenReview.</p>
+
+        <p><strong>Topics of interest include but are not limited to:</strong></p>
+        <ul>
+            <li>Continual learning and adaptation for large language models and vision-language models</li>
+            <li>Lifelong learning for embodied agents and robotic systems</li>
+            <li>Catastrophic forgetting mitigation in foundation model fine-tuning</li>
+            <li>Memory, replay, and knowledge consolidation mechanisms</li>
+            <li>Online and few-shot adaptation in non-stationary environments</li>
+            <li>Long-term skill acquisition and composition</li>
+            <li>Safety and reliability during continual model updates</li>
+            <li>Benchmarks and evaluation frameworks for continual learning</li>
+            <li>Brain-inspired and cognitively motivated continual learning</li>
+            <li>Continual reinforcement learning and curriculum design</li>
+        </ul>
+
+        <p>Each submission will receive at least three reviews. Submissions must not re-present finalized work previously published at ML venues.</p>
+
+        <p><strong>Submission link:</strong> Coming soon on OpenReview.</p>
+
+        <h3 style="font-size:1.15rem; margin-top:2rem; margin-bottom:0.75rem; color:#1a1a1a;">Important Dates</h3>
+        <table class="dates-table">
+            <tr>
+                <td>Submission Deadline</td>
+                <td>August 29, 2026 (AoE)</td>
+            </tr>
+            <tr>
+                <td>Notification</td>
+                <td>September 26, 2026</td>
+            </tr>
+            <tr>
+                <td>Camera-ready</td>
+                <td>TBD</td>
+            </tr>
+            <tr>
+                <td>Workshop Date</td>
+                <td>December 2026 (TBD)</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Schedule -->
+    <section id="schedule">
+        <h2>Schedule</h2>
+        <p>Tentative one-day schedule. Morning session focuses on continual learning for foundation models; afternoon session focuses on embodied agents and robotics.</p>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Event</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="session-header"><td colspan="2">Morning: Foundation Models</td></tr>
+                <tr><td>08:30–08:40</td><td>Opening Remarks</td></tr>
+                <tr><td>08:40–09:10</td><td>Invited Talk 1</td></tr>
+                <tr><td>09:10–09:40</td><td>Invited Talk 2</td></tr>
+                <tr><td>09:40–10:10</td><td>Invited Talk 3</td></tr>
+                <tr><td>10:10–10:40</td><td>Break & Poster Session I</td></tr>
+                <tr><td>10:40–11:40</td><td>Contributed Short Orals I (5 min + 2 min Q&A)</td></tr>
+                <tr><td>11:40–12:10</td><td>Panel: Continual Learning for Foundation Models</td></tr>
+                <tr class="session-header"><td colspan="2">Afternoon: Embodied Agents</td></tr>
+                <tr><td>12:10–13:30</td><td>Lunch Break</td></tr>
+                <tr><td>13:30–14:00</td><td>Invited Talk 4</td></tr>
+                <tr><td>14:00–14:30</td><td>Invited Talk 5</td></tr>
+                <tr><td>14:30–15:00</td><td>Invited Talk 6</td></tr>
+                <tr><td>15:00–15:30</td><td>Break & Poster Session II</td></tr>
+                <tr><td>15:30–16:20</td><td>Contributed Short Orals II (5 min + 2 min Q&A)</td></tr>
+                <tr><td>16:20–16:50</td><td>Panel: Continual Learning for Embodied Agents</td></tr>
+                <tr><td>16:50–17:00</td><td>Awards & Closing Remarks</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Invited Speakers -->
+    <section id="speakers">
+        <h2>Invited Speakers</h2>
+        <div class="people-grid">
+            <div class="person">
+                <div class="placeholder-avatar">IR</div>
+                <div class="name">Irina Rish</div>
+                <div class="affiliation">Université de Montréal / Mila</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">HS</div>
+                <div class="name">Hao Su</div>
+                <div class="affiliation">Fudan University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">CF</div>
+                <div class="name">Chelsea Finn</div>
+                <div class="affiliation">Stanford University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">AG</div>
+                <div class="name">Abhishek Gupta</div>
+                <div class="affiliation">University of Washington</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">GV</div>
+                <div class="name">Gido M. van de Ven</div>
+                <div class="affiliation">University of Groningen</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizers -->
+    <section id="organizers">
+        <h2>Organizers</h2>
+        <div class="people-grid">
+            <div class="person">
+                <div class="placeholder-avatar">JC</div>
+                <div class="name">Jonghyun Choi</div>
+                <div class="affiliation">Seoul National University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">XW</div>
+                <div class="name">Xiao-Ming Wu</div>
+                <div class="affiliation">Hong Kong Polytechnic University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">RA</div>
+                <div class="name">Rahaf Aljundi</div>
+                <div class="affiliation">Toyota Motor Europe</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">JM</div>
+                <div class="name">Jorge Mendez-Mendez</div>
+                <div class="affiliation">Stony Brook University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">LW</div>
+                <div class="name">Liyuan Wang</div>
+                <div class="affiliation">Tsinghua University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">YF</div>
+                <div class="name">Yujie Feng</div>
+                <div class="affiliation">Hong Kong Polytechnic University</div>
+            </div>
+            <div class="person">
+                <div class="placeholder-avatar">YL</div>
+                <div class="name">Yuankai Luo</div>
+                <div class="affiliation">Nanjing University</div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2026 CL-FMEA Workshop @ NeurIPS 2026. All rights reserved.
+</footer>
+
+</body>
+</html>
